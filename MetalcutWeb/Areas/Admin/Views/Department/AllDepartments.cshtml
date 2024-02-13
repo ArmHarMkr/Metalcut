@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Department>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Departmen name</th>
+            <th scope="col">Employee count</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.DepartmentName</td>
+                <td> <a asp-area="Admin" asp-controller="Department" asp-action="EditDepartment" asp-route-id="@item.Id">Edit</a> </td>
+                <td> <form asp-area="Admin" asp-controller="Department" asp-action="DeleteDepartment" asp-route-id="@item.Id">
+                        <button type="submit">Delete</button>
+                    
+                    </form> 
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

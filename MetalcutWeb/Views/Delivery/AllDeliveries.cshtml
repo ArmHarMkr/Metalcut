@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Delivery>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Requested User</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Requested Time</th>
+            <th scope="col">Is Accepted</th>
+            <th scope="col">Price</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var delivery in Model)
+        {
+            <tr>
+                <th scope="row">@delivery.Id</th>
+                <td>@delivery.RequestedUser.FullName</td>
+                <td>@delivery.DeliveryProduct.ProdName</td>
+                <td>@delivery.RequestedTime</td>
+                <td>@(delivery.IsAccepted ? "Delivery is accepted" : "Delivery is not accepted yet")</td>
+                <td>@delivery.Price</td>
+                <td><form asp-controller="Delivery" asp-action="DeleteDeliveryRequest" asp-route-id="@delivery.Id">
+                        <button type="submit">Delete request</button>
+                    </form>
+                </td>
+                <td><a asp-action="Index" asp-controller="Home">All Products</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

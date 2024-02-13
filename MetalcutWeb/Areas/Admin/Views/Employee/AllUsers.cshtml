@@ -1,0 +1,80 @@
+﻿@model IEnumerable<AppUser>
+@using MetalcutWeb.Domain.Roles
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<AppUser> userManager
+
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Employee Email</th>
+            <th scope="col">User Role</th>
+            <th scope="col">Employee Registered time</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FullName</td>
+                <td>@item.Email</td>
+                <td>
+                    @foreach (var role in await userManager.GetRolesAsync(item))
+                    {
+                        @role
+                    }
+                </td>
+                <td>@item.UserCreatedTime</td>
+                <td>
+                    @if (!await userManager.IsInRoleAsync(item, SD.Role_Admin))
+                    {
+
+                        @if(await userManager.IsInRoleAsync(item, SD.Role_Customer))
+                        {
+                            <form asp-area="Admin" asp-controller="Employee" asp-action="GiveEmployeeRole" asp-route-id="@item.Id" class="role-button">
+                                <button type="submit">Give Employee Role</button>
+                            </form>
+                            <form asp-area="Admin" asp-controller="Employee" asp-action="GiveManagerRole" asp-route-id="@item.Id" class="role-button">
+                                <button type="submit">Give Manager Role</button>
+                            </form>
+                        }
+                        @if(await userManager.IsInRoleAsync(item, SD.Role_Employee))
+                        {
+                            <form asp-area="Admin" asp-action="GiveManagerRole" asp-controller="Employee" asp-route-id="@item.Id" class="role-button">
+                                <button type="submit">Give Manager Role</button>
+                            </form>
+                            <form asp-area="Admin" asp-controller="Employee" asp-action="GiveCustomerRole" asp-route-id="@item.Id" class="role-button">
+                                
+                                <button type="submit">Give Customer Role</button>
+                            </form>
+                        }                        
+                        @if (await userManager.IsInRoleAsync(item, SD.Role_Manager))
+                        {
+                            <form asp-area="Admin" asp-action="GiveEmployeeRole" asp-controller="Employee" asp-route-id="@item.Id" class="role-button">
+                                <button type="submit">Decline to Employee Role</button>
+                            </form>
+                            <form asp-area="Admin" asp-action="GiveCustomerRole" asp-controller="Employee" asp-route-id="@item.Id" class="role-button">
+                                <button type="submit">Decline to Customer Role</button>
+                            </form>
+                        }
+                    }
+                    else
+                    {
+                        <p>You are an Admin</p>
+                    }
+
+
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
