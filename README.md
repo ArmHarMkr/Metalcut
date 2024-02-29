@@ -18,7 +18,7 @@ Metalcut's company ecosystem is a comprehensive project developed with Asp.Net C
 
 To set up the Metalcut Company Ecosystem on your environment, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/metalcut.git`
+1. Clone the repository: `git clone https://github.com/ArmHarMkr/metalcut.git`
 
 2. Navigate to the project directory: `cd metalcut-ecosystem`
 
