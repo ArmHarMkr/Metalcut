@@ -10,7 +10,6 @@ namespace MetalcutWeb.Domain.Entity
         [AllowNull]
         public AppUser AcceptedUser { get; set; } = null; // The manager or employee that accepted the delivery
         public ProductEntity DeliveryProduct { get; set; }
-        public string DeliveryProductId { get; set; }
         public DateTime RequestedTime { get; set; } = DateTime.Now;
         [AllowNull]
         public DateTime AcceptedTime { get; set; }
