@@ -25,9 +25,12 @@
                 <td>@delivery.RequestedTime</td>
                 <td>@(delivery.IsAccepted ? "Delivery is accepted" : "Delivery is not accepted yet")</td>
                 <td>@delivery.Price</td>
-                <td><form asp-controller="Delivery" asp-action="DeleteDeliveryRequest" asp-route-id="@delivery.Id">
-                        <button type="submit">Delete request</button>
-                    </form>
+                <td>@if (!delivery.IsAccepted)
+                    {
+                        <form asp-controller="Delivery" asp-action="DeleteDeliveryRequest" asp-route-id="@delivery.Id">
+                            <button type="submit">Delete request</button>
+                        </form>
+                    }
                 </td>
                 <td><a asp-action="Index" asp-controller="Home">All Products</a></td>
             </tr>

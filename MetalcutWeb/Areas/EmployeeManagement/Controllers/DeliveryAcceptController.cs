@@ -27,7 +27,6 @@ namespace MetalcutWeb.Areas.EmployeeManagement.Controllers
 
         public async Task<IActionResult> AllDeliveries()
         {
-            /*            var deliveriesFromDb = _unitOfWork.Delivery.GetAll();*/
             var deliveriesFromDb = _db.Deliveries
                 .Include(d => d.DeliveryProduct)
                 .Include(d => d.RequestedUser)
@@ -38,11 +37,6 @@ namespace MetalcutWeb.Areas.EmployeeManagement.Controllers
         [HttpPost("AcceptDelivery")]
         public async Task<IActionResult> AcceptDelivery(string? id)
         {
-
-            /*          AppUser currentUser = await _userManager.GetUserAsync(User);
-                      var deliveryFromDb = _unitOfWork.Delivery.Get(d => d.Id == id);
-                      var deliveryList = await _unitOfWork.Delivery.AcceptDelivery(currentUser, deliveryFromDb);
-                      return View("AllDeliveries", deliveryList); */
             AppUser currentUser = await _userManager.GetUserAsync(User);
             Delivery deliveryFromDb = _unitOfWork.Delivery.Get(d => d.Id == id);
             await _unitOfWork.Delivery.AcceptDelivery(currentUser, deliveryFromDb);

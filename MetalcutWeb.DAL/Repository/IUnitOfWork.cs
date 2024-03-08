@@ -6,6 +6,7 @@
         IEmployeeRepository Employee { get; }
         IProductRepository Product { get; }
         IDeliveryRepository Delivery { get; }
+        IChatRepository Chat { get; }
         Task Save();
     }
 }

@@ -1,12 +1,6 @@
 ﻿using MetalcutWeb.Domain.Entity;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MetalcutWeb.DAL.Data
 {
@@ -20,9 +14,23 @@ namespace MetalcutWeb.DAL.Data
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Delivery>()
+                .HasOne(d => d.RequestedUser)
+                .WithMany()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.ClientSetNull);
+
+            modelBuilder.Entity<Delivery>()
+                .HasOne(d => d.AcceptedUser)
+                .WithMany()
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
+
+
     }
 }

@@ -103,10 +103,9 @@ namespace MetalcutWeb.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("AcceptedUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("DeliveryProductId1")
+                    b.Property<string>("DeliveryProductId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsAccepted")
@@ -119,18 +118,17 @@ namespace MetalcutWeb.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RequestedUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AcceptedUserId");
 
-                    b.HasIndex("DeliveryProductId1");
+                    b.HasIndex("DeliveryProductId");
 
                     b.HasIndex("RequestedUserId");
 
-                    b.ToTable("Deliveries");
+                    b.ToTable("Deliveries", (string)null);
                 });
 
             modelBuilder.Entity("MetalcutWeb.Domain.Entity.Department", b =>
@@ -142,9 +140,12 @@ namespace MetalcutWeb.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("EmployeeCount")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("MetalcutWeb.Domain.Entity.MessageEntity", b =>
@@ -171,7 +172,7 @@ namespace MetalcutWeb.DAL.Migrations
 
                     b.HasIndex("SenderId");
 
-                    b.ToTable("Messages");
+                    b.ToTable("Messages", (string)null);
                 });
 
             modelBuilder.Entity("MetalcutWeb.Domain.Entity.ProductEntity", b =>
@@ -192,7 +193,7 @@ namespace MetalcutWeb.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -336,19 +337,15 @@ namespace MetalcutWeb.DAL.Migrations
                 {
                     b.HasOne("MetalcutWeb.Domain.Entity.AppUser", "AcceptedUser")
                         .WithMany()
-                        .HasForeignKey("AcceptedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AcceptedUserId");
 
                     b.HasOne("MetalcutWeb.Domain.Entity.ProductEntity", "DeliveryProduct")
                         .WithMany()
-                        .HasForeignKey("DeliveryProductId1");
+                        .HasForeignKey("DeliveryProductId");
 
                     b.HasOne("MetalcutWeb.Domain.Entity.AppUser", "RequestedUser")
                         .WithMany()
-                        .HasForeignKey("RequestedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RequestedUserId");
 
                     b.Navigation("AcceptedUser");
 

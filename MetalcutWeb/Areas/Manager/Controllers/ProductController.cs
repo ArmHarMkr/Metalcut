@@ -1,11 +1,7 @@
-﻿using MetalcutWeb.Areas.Manager.ViewModel;
-using MetalcutWeb.DAL.Repository;
+﻿using MetalcutWeb.DAL.Repository;
 using MetalcutWeb.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.Construction;
-using SQLitePCL;
 
 namespace MetalcutWeb.Areas.Manager.Controllers
 {

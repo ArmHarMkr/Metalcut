@@ -1,18 +1,11 @@
-﻿using MetalcutWeb.Areas.Admin.ViewModels;
-using MetalcutWeb.DAL.Data;
+﻿using MetalcutWeb.DAL.Data;
 using MetalcutWeb.DAL.Repository;
 using MetalcutWeb.Domain.Entity;
-using MetalcutWeb.Domain.Roles;
 using MetalcutWeb.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Build.ObjectModelRemoting;
-using Microsoft.CodeAnalysis.Operations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using NuGet.Protocol;
-using SQLitePCL;
 
 namespace MetalcutWeb.Areas.Admin.Controllers
 {
