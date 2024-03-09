@@ -14,12 +14,11 @@ namespace MetalcutWeb.DAL.Implementations
     {
         private AppDbContext _db;
         UserManager<AppUser> _userManager;
-        //Site to add other Interfaces
         public IDepartmentRepository Department { get; private set; }
+        //Site to add other Interfaces
         public IEmployeeRepository Employee { get; private set; }
         public IProductRepository Product { get; private set; }
         public IDeliveryRepository Delivery { get; private set; }
-        public IChatRepository Chat { get; private set; }
         //---------
 
         public UnitOfWork(AppDbContext db, UserManager<AppUser> userManager)
@@ -30,7 +29,6 @@ namespace MetalcutWeb.DAL.Implementations
             Employee = new EmployeeRepository(_db, _userManager);
             Product = new ProductRepository(_db);
             Delivery = new DeliveryRepository(_db);
-            Chat = new ChatRepository(_db);
         }
 
         public async Task Save()

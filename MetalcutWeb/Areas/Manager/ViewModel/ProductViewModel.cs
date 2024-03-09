@@ -1,4 +1,5 @@
 ﻿using MetalcutWeb.Domain.Entity;
+using Microsoft.Build.ObjectModelRemoting;
 
 namespace MetalcutWeb.Areas.Manager.ViewModel
 {

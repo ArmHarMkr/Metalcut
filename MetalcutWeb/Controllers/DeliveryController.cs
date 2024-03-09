@@ -1,14 +1,12 @@
 ﻿using MetalcutWeb.DAL.Data;
 using MetalcutWeb.DAL.Repository;
 using MetalcutWeb.Domain.Entity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace MetalcutWeb.Controllers
 {
-    [Authorize]
     public class DeliveryController : Controller
     {
         private readonly AppDbContext _db;

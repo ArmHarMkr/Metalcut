@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +13,6 @@ namespace MetalcutWeb.Domain.Entity
         [Key]
         public string? MessageId { get; set; } = Guid.NewGuid().ToString();
         public AppUser Sender { get; set; }
-        [AllowNull]
         public AppUser Receiver { get; set; }
 
         [Required(ErrorMessage = "Input something")]

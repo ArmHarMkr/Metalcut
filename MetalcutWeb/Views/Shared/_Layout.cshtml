@@ -35,7 +35,6 @@
                         var currentUser = await UserManager.GetUserAsync(User);
                         var isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
                         var isManager = await UserManager.IsInRoleAsync(currentUser, "Manager");
-                        var isEmployee =  await UserManager.IsInRoleAsync(currentUser, "Employee");
 
                         if (isAdmin)
                         {
@@ -52,9 +51,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="EmployeeManagement" asp-action="AllDeliveries" asp-controller="DeliveryAccept">Delivery List</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="EmployeeManagement" asp-action="AllChats" asp-controller="ChatAnswer">Reply to chats</a>
-                                </li>
                             </ul>
                         }
                         else if (isManager)
@@ -62,25 +58,6 @@
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Manager" asp-action="AllProducts" asp-controller="Product">Product list for Manager</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="EmployeeManagement" asp-action="Chats" asp-controller="Chat">Reply to chats</a>
-                                </li>
-                            </ul>
-                        }
-                        else if (isEmployee)
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="EmployeeManagement" asp-action="AllMsgUsers" asp-controller="ChatAnswer">Reply to chats</a>
-                                </li>
-                            </ul>
-                        }
-                        else
-                        {
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-action="AllEmployees" asp-controller="Chat">Chats</a>
                                 </li>
                             </ul>
                         }
