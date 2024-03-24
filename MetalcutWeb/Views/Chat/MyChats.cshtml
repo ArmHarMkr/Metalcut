@@ -1,0 +1,12 @@
+﻿@model List<ChatEntity>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach(ChatEntity chat in Model)
+{
+    <p>@chat.UserOne</p>
+    <p>@chat.Messages.Count()</p>
+    <a asp-action="Messenger" asp-controller="Chat" asp-route-id="@chat.UserOne.Id">Answer to chat</a>
+}

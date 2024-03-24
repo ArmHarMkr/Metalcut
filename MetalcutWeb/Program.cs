@@ -23,9 +23,9 @@ builder.Services.AddDefaultIdentity<AppUser>()
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();    
-builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IChatRepository, ChatRepository>();  
 builder.Services.AddScoped<IDeliveryRepository, DeliveryRepository>();
 
 var app = builder.Build();

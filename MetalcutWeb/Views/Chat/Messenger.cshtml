@@ -1,0 +1,39 @@
+﻿@using MetalcutWeb.ViewModels
+@model ChatViewModel
+@inject UserManager<AppUser> _userManager
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h2>@Model.ChatEntity.ChatName</h2>
+    <h2>@Model.ChatEntity.Id</h2>
+    <div class="chat-container">
+        @foreach (var message in Model.ChatEntity.Messages) // null error
+        {
+            <div class="message">
+                @if (message.Sender.UserName == _userManager.GetUserName(User))
+                {
+                    <p>
+                        <strong>You:</strong> @message.MessageText | @message.SentTime.ToString("HH:mm") | <form asp-action="DeleteMsg" asp-route-id="@message.MessageId"><button type="submit">Delete</button></form>
+                    </p>
+                }
+                else
+                {
+                    <p>
+                        <strong>@message.Sender.FullName:</strong> @message.MessageText | @message.SentTime.ToString("HH:mm")
+                    </p>
+                }
+            </div>
+        }
+    </div>
+    <form asp-action="SendMessage" asp-controller="Chat" asp-route-id="@Model.ChatEntity.Id" method="post">
+        <div class="form-group">
+            <input asp-for="MessageEntity.MessageText" class="form-control" placeholder="Type your message" />
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+
+
+</div>

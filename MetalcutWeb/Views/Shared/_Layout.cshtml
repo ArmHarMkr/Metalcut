@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using MetalcutWeb.Domain.Roles
+@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
@@ -33,8 +34,10 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                         var currentUser = await UserManager.GetUserAsync(User);
-                        var isAdmin = await UserManager.IsInRoleAsync(currentUser, "Admin");
-                        var isManager = await UserManager.IsInRoleAsync(currentUser, "Manager");
+                        var isAdmin = await UserManager.IsInRoleAsync(currentUser, SD.Role_Admin);
+                        var isManager = await UserManager.IsInRoleAsync(currentUser, SD.Role_Manager);
+                        var isEmployee = await UserManager.IsInRoleAsync(currentUser, SD.Role_Employee);
+                        var isCustomer = await UserManager.IsInRoleAsync(currentUser, SD.Role_Customer);
 
                         if (isAdmin)
                         {
@@ -61,6 +64,23 @@
                                 </li>
                             </ul>
                         }
+                        else if (isEmployee)
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="MyChats" asp-controller="Chat">Answer to chats</a>
+                                </li>
+                            </ul>
+                        }
+                        else if (isCustomer)
+                        {
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-action="GetEmployee" asp-controller="Chat">Send chat</a>
+                                </li>
+                            </ul>
+                        }
+
                     }
                     <partial name="_LoginPartial.cshtml" />
                 </div>

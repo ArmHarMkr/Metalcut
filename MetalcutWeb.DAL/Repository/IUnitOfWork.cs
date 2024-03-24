@@ -2,10 +2,11 @@
 {
     public interface IUnitOfWork
     {
-        IDepartmentRepository Department { get; }
         IEmployeeRepository Employee { get; }
         IProductRepository Product { get; }
         IDeliveryRepository Delivery { get; }
+        IDepartmentRepository Department { get; }
+        IChatRepository Chat { get; }
         Task Save();
     }
 }

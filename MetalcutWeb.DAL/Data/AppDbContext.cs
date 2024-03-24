@@ -19,10 +19,36 @@ namespace MetalcutWeb.DAL.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<ProductEntity> Products { get; set; }
         public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<ChatEntity> Chats { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(builder);
+            base.OnModelCreating(modelBuilder);
+
+/*            modelBuilder.Entity<Delivery>()
+                .HasOne(d => d.RequestedUser)
+                .WithMany()
+                .HasForeignKey(d => d.RequestedUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Delivery>()
+                .HasOne(d => d.AcceptedUser)
+                .WithMany()
+                .HasForeignKey(d => d.AcceptedUserId)
+                .OnDelete(DeleteBehavior.Restrict);*/
+            
+/*            modelBuilder.Entity<ChatEntity>()
+                .HasOne(u => u.UserOne)
+                .WithMany()
+                .HasForeignKey(u => u.UserOneId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
+            modelBuilder.Entity<ChatEntity>()
+                .HasOne(u => u.UserTwo)
+                .WithMany()
+                .HasForeignKey(u => u.UserTwoId)
+                .OnDelete(DeleteBehavior.Restrict);*/
         }
     }
 }
+

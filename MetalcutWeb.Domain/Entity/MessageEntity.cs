@@ -14,9 +14,12 @@ namespace MetalcutWeb.Domain.Entity
         public string? MessageId { get; set; } = Guid.NewGuid().ToString();
         public AppUser Sender { get; set; }
         public AppUser Receiver { get; set; }
-
         [Required(ErrorMessage = "Input something")]
         public string MessageText { get; set; }
         public DateTime SentTime { get; set; } = DateTime.Now;
+
+
+/*        public ChatEntity MessageSendingChat { get; set; } */
+
     }
 }

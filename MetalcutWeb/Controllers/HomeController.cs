@@ -11,7 +11,6 @@ using Microsoft.Identity.Client;
 
 namespace MetalcutWeb.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly AppDbContext _db;
