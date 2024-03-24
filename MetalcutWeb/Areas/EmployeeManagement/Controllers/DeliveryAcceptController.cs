@@ -1,12 +1,10 @@
-﻿using MetalcutWeb.DAL.Data;
+using MetalcutWeb.DAL.Data;
 using MetalcutWeb.DAL.Repository;
 using MetalcutWeb.Domain.Entity;
-using MetalcutWeb.Domain.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using SQLitePCL;
 
 namespace MetalcutWeb.Areas.EmployeeManagement.Controllers
 {
@@ -39,7 +37,10 @@ namespace MetalcutWeb.Areas.EmployeeManagement.Controllers
         public async Task<IActionResult> AcceptDelivery(string? id)
         {
             AppUser currentUser = await _userManager.GetUserAsync(User);
-            Delivery deliveryFromDb = _unitOfWork.Delivery.Get(d => d.Id == id);
+            Delivery deliveryFromDb = await _db.Deliveries
+                                        .Include(d => d.AcceptedUser)
+                                        .Include(d => d.RequestedUser)
+                                        .FirstOrDefaultAsync(d => d.Id == id);
             await _unitOfWork.Delivery.AcceptDelivery(currentUser, deliveryFromDb);
             var deliveryList = _db.Deliveries
                 .Include(d => d.DeliveryProduct)
