@@ -1,4 +1,4 @@
-﻿using MetalcutWeb.DAL.Data;
+using MetalcutWeb.DAL.Data;
 using MetalcutWeb.DAL.Repository;
 using MetalcutWeb.Domain.Entity;
 using Microsoft.AspNetCore.Authorization;
@@ -39,7 +39,11 @@ namespace MetalcutWeb.Controllers
         public async Task<IActionResult> AllDeliveries()
         {
             var currentUser = await _userManager.GetUserAsync(User);
-            IEnumerable<Delivery> deliveriesFromDb = _db.Deliveries.Include(d => d.DeliveryProduct).Where(p => p.RequestedUser == currentUser);
+            IEnumerable<Delivery> deliveriesFromDb = _db.Deliveries
+                                                        .Include(d => d.DeliveryProduct)
+                                                        .Include(d => d.RequestedUser)
+                                                        .Include(d => d.AcceptedUser)
+                                                        .Where(p => p.RequestedUser == currentUser);
             return View(deliveriesFromDb);
         }
 
