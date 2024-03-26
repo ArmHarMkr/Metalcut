@@ -45,6 +45,7 @@ namespace MetalcutWeb.Areas.EmployeeManagement.Controllers
             var deliveryList = _db.Deliveries
                 .Include(d => d.DeliveryProduct)
                 .Include(d => d.AcceptedUser)
+                .Include(d => d.RequestedUser)
                 .ToList();
             return View("AllDeliveries", deliveryList);
         }
